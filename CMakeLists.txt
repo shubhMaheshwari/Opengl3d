@@ -1,4 +1,4 @@
-project(graphics_asgn1)
+project(graphics_asgn2)
 cmake_minimum_required(VERSION 2.8)
 aux_source_directory(src SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
@@ -22,6 +22,7 @@ endif()
 if (APPLE)
   target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
+
 
 # pkg_check_modules(AO REQUIRED ao)
 # include_directories(${AO_INCLUDE_DIRS})

@@ -27,6 +27,7 @@ struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat red, const GLfloat green, const GLfloat blue, GLenum fill_mode = GL_FILL);
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t color, GLenum fill_mode = GL_FILL);
 void       draw3DObject(struct VAO *vao);
+GLuint createTexture (const char* filename);
 
 // input.cpp
 void keyboard(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -67,19 +68,27 @@ enum direction_t { DIR_UP, DIR_RIGHT, DIR_DOWN, DIR_LEFT };
 struct bounding_box_t {
     float x;
     float y;
+    float z;
     float width;
     float height;
+    float depth;
 };
 
+// main.cpp
 bool detect_collision(bounding_box_t a, bounding_box_t b);
+void get_gift();
 
 extern float screen_zoom, screen_center_x, screen_center_y;
-void reset_screen();
-
+extern int boat_health,score;
 // ---- Colors ----
 extern const color_t COLOR_RED;
+extern const color_t COLOR_ORANGE;
 extern const color_t COLOR_GREEN;
+extern const color_t COLOR_BLUE;
+extern const color_t COLOR_BROWN;
+extern const color_t COLOR_GREY;
 extern const color_t COLOR_BLACK;
+extern const color_t COLOR_WHITE;
 extern const color_t COLOR_BACKGROUND;
 
 #endif

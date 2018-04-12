@@ -1,3 +1,7 @@
+# IMPORTANT
+
+run ./test_moss.sh before submitting 
+
 Graphics Boilerplate Code
 =========================
 

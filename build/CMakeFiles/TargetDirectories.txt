@@ -1,0 +1,3 @@
+/home/shubh/Opengl3d/build/CMakeFiles/edit_cache.dir
+/home/shubh/Opengl3d/build/CMakeFiles/rebuild_cache.dir
+/home/shubh/Opengl3d/build/CMakeFiles/graphics_asgn2.dir
