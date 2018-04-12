@@ -14,15 +14,11 @@ GLFWwindow *window;
 /**************************
 * Customizable functions *
 **************************/
-#define num_barrels 10
-#define num_rocks 40
 
-Monster monsters;
 Boat boat;
+Cube test_cube;
+
 Sea sea;
-vector<Sphere> sphere;
-vector<Cube> barrels;
-Cube rocks[num_rocks];
 
 
 int boat_health = 100,score = 0;
@@ -32,7 +28,6 @@ float target_x,target_y,target_z;
 float camera_rotation_angle = 95.0;
 // Check which camera view is present
 bool camera_follower = true,camera_top_view=false;
-bool sphere_hold = false, boost_use = false;
 
 // Wind Oscillations
 float wind = 0;
@@ -82,19 +77,8 @@ void draw() {
 
 	// Scene render
 	sea.draw(VP);
+	test_cube.draw(VP);
 	boat.draw(VP);
-    monsters.draw(VP);
-
-	vector<Sphere> :: iterator s;
-	for (s = sphere.begin(); s < sphere.end(); ++s)
-		s->draw(VP);
-
-	vector<Cube> :: iterator b;
-	for (b = barrels.begin(); b < barrels.end(); ++b)
-		b->draw(VP);
-
-	for (int i = 0; i < num_rocks; ++i)
-		rocks[i].draw(VP);
 
 	
 }
@@ -147,16 +131,10 @@ void tick_input(GLFWwindow *window) {
 void tick_elements() {
 
 
-    monsters.tick(boat.position.x, boat.position.z);
 
 	boat.tick(wind);
 	sea.tick();
 
-	// Move each ball and erase them if they have reached the bottom
-	vector<Sphere> :: iterator s;
-	for (s = sphere.begin(); s < sphere.end(); ++s)
-		if(s->tick())
-			sphere.erase(s);
 
 	sea.set_position(boat.position.x,boat.position.z);
 
@@ -165,30 +143,16 @@ void tick_elements() {
 
 
 void collision_function(){
-    for (int i = 0; i < num_rocks; ++i)
-    if(detect_collision(boat.bounding_box(),rocks[i].bounding_box()))
-        {
-            printf("Hit Rock Bottom\n");
-            boat.speed = -0.5*boat.speed;
-            boat_health -= 5;
-        }
 
 
 }
 void initGL(GLFWwindow *window, int width, int height) {
 	boat       = Boat(0, 0, COLOR_ORANGE);
 	
-    monsters    = Monster(COLOR_RED);
+	test_cube  = Cube(0, 0,0, 5,5,5,COLOR_WHITE);
 
 	sea        = Sea( 0, 0, COLOR_BLUE);
 
-	// Barrels
-	for(int i=0;i<num_barrels;i++)
-		barrels.push_back(Cube(rand()%500 -250,0,rand()%500 -250,10,5,5,COLOR_BROWN));
-
-	// Rocks
-	for (int i = 0; i < num_rocks; ++i)
-		rocks[i] = Cube(5*(rand()%200 -100),0,5*(rand()%200 -100),rand()%30 + 10,rand()%30 ,rand()%30+ 10,COLOR_GREY);
 
 
 
@@ -232,16 +196,6 @@ int main(int argc, char **argv) {
 			// OpenGL Draw commands
 			if(boat_health <= 0)
 				break;
-
-			printf("%d\n",(t%180 -90) );
-			wind = (t%30 -15);
-			
-			// Time for things to recharge
-			if(t%50 == 0)
-			{	
-				sphere_hold = false;
-				boost_use = true;
-			}
 
 
 

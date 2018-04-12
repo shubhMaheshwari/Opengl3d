@@ -22,7 +22,6 @@ public:
 
 
     Cube plank[6];
-    Rectangle sail;
 };
 
 

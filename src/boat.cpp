@@ -21,8 +21,6 @@ Boat::Boat(float x, float z, color_t color) {
     this->plank[5] =   Cube(-2,0, -8 ,0.4,8,8, color);;
     this->plank[5].rotation = -30;
 
-    this->sail =  Rectangle(0,7,-0.5,6,18,COLOR_WHITE);
-    this->sail.rotation = 90;
 }
 
 void Boat::draw(glm::mat4 VP) {
@@ -40,7 +38,6 @@ void Boat::draw(glm::mat4 VP) {
     for(int i=0;i<6;i++)
         plank[i].draw(MVP);
 
-    sail.draw(MVP);
 
 }
 
@@ -63,7 +60,6 @@ void Boat::tick(float wind){
     else{
          yspeed -= 0.006;
     }
-    sail.rotation = wind;
 
 }
 
